@@ -5,15 +5,14 @@ const helmet = require('helmet');
 const multer = require('multer')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
-const {fileURLToPath} = require('url')
 const path = require('path')
 const mongoose = require('mongoose')
-const register= require('./controllers/auth');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/users')
+const { register } = require('./controllers/auth');
 
 // configurations:
 
-// const __filename = fileURLToPath(require(''));
-// const __dirname = path.dirname(__filename)
 
 dotenv.config()
 const app = express();
@@ -40,6 +39,8 @@ const upload = multer({storage})
 // Routes
 
 app.post("/auth/register",upload.single("picture"),register);
+app.use('/auth',authRoutes)
+app.use('/users',userRoutes)
 
 
 // database connection
