@@ -8,8 +8,15 @@ const morgan = require('morgan')
 const path = require('path')
 const mongoose = require('mongoose')
 const authRoutes = require('./routes/auth');
+const postRoutes = require('./routes/post'); 
 const userRoutes = require('./routes/users')
 const { register } = require('./controllers/auth');
+const { createPost } = require('./controllers/post');
+const verifyToken = require('./middlewares/auth');
+const User = require('./models/User')
+const Post = require('./models/Post')
+const {users,posts} = require('./data/index');
+
 
 // configurations:
 
@@ -39,8 +46,12 @@ const upload = multer({storage})
 // Routes
 
 app.post("/auth/register",upload.single("picture"),register);
+app.post('/posts',verifyToken,upload.single("picture"),createPost)
+
+
 app.use('/auth',authRoutes)
 app.use('/users',userRoutes)
+app.use('/posts',postRoutes)
 
 
 // database connection
