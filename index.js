@@ -13,9 +13,9 @@ const userRoutes = require('./routes/users')
 const { register } = require('./controllers/auth');
 const { createPost } = require('./controllers/post');
 const verifyToken = require('./middlewares/auth');
-const User = require('./models/User')
-const Post = require('./models/Post')
-const {users,posts} = require('./data/index');
+// const User = require('./models/User')
+// const Post = require('./models/Post')
+// const {users,posts} = require('./data/index');
 
 
 // configurations:
