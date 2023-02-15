@@ -17,7 +17,7 @@ const User = require('../models/User')
         } = req.body
 
         const salt = await bcrypt.genSalt()
-        const passwordHash = bcrypt.hash(password,salt);
+        const passwordHash = await bcrypt.hash(password,salt);
         const newUser = new User({
             firstName,
             lastName,
@@ -48,7 +48,7 @@ const login = async(req,res)=>{
 
     if(!isMatch) return res.status(400).json({message:'Invalid credentials'})
 
-    const token = jwt.sign({id:user._id},process.env.SECRET_KEY)
+    const token = jwt.sign({id:user._id},process.env.JWT_SECRET)
     delete user.password
     res.status(200).json({token,user});
     
