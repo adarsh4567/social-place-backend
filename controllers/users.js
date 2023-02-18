@@ -32,7 +32,7 @@ const getUserFriends = async(req,res)=>{
 
 const addRemoveFriend = async(req,res)=>{
    try {
-    const {id,friendId} = req.body;
+    const {id,friendId} = req.params;
     const user = await User.findById(id);
     const user_friend = await User.findById(friendId)
 
