@@ -45,6 +45,10 @@ const upload = multer({storage})
 
 // Routes
 
+app.get('/',(req,res)=>{
+    res.json({message:"Success"})
+})
+
 app.post("/auth/register",upload.single("picture"),register);
 app.post('/posts',verifyToken,upload.single("picture"),createPost)
 
