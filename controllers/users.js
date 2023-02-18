@@ -34,14 +34,14 @@ const addRemoveFriend = async(req,res)=>{
    try {
     const {id,friendId} = req.params;
     const user = await User.findById(id);
-    const user_friend = await User.findById(friendId)
+    const friend = await User.findById(friendId)
 
     if(user.friends.includes(friendId)){
         user.friends = user.friends.filter((uId)=> uId!==friendId);
-        user_friend.friends = user_friend.friends.filter((fId)=> fId!==id)
+        friend.friends = friend.friends.filter((fId)=> fId!==id)
     }else{
         user.friends.push(friendId)
-        user_friend.push(id)
+        friend.push(id)
     }
     await user.save();
     await user_friend.save()
